@@ -1,19 +1,15 @@
- #pragma once
 #include <iostream>
 
-
+//Setting the different loan options
+const int tenYear(10), fifteenYear(15),thirtyYear(30);
 /*Found how to define namespace here 
 https://docs.microsoft.com/en-us/cpp/cpp/header-files-cpp?view=msvc-170
 */
 namespace decleration{
 
-//Setting the different loan options
-const int tenYear(10), fifteenYear(15),thirtyYear(30);
-
-
-
 class debtor
 {
+    public:
     //private:
     
         //The Option that the person chose
@@ -36,7 +32,7 @@ class debtor
                 loanAmmount = 0.0f;
                 yearlyIntrest = 0.0f;
             }
-        void setLoan(int s);
+        void print(std::string s);
 
 
         void setLoanOption(int& loanOption);
