@@ -1,16 +1,15 @@
 #include "declerations.h"
 #include <iostream>
+#include <cmath>
 
-using namespace std;
+
 using namespace decleration;
-
+using namespace std;
 
 int main(){
+  
+    debtor collin;
     
-    debtor Collin;
-    Collin.loanOptFunc();
-
-
 
     return 0;
 }
