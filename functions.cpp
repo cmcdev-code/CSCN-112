@@ -2,44 +2,23 @@
 #include <cmath>
 #include <iostream>
 
-using namespace std;
+
 using namespace decleration;
+using namespace std;
 
 //*******************************************
 //Function Declerations
 
-int loanOptFunc(){
-    
-    int x(0);
-    cin>>x;
-    while( x!=10 || x!=15 || x!=30){
-        std::cout<<"Error You have entered a year that is not an option. /n";
-        std::cin.ignore(9999, '\n');
-        cin>>x;
-    }
-    if (x==10){
-        return 10; 
-    }
-    else if (x==15){
-        return 15;
-    }
-    else if (x==30){
-        return 30;
-    }
-}
-
 //Function that outputs the txt to the terminal 
-//void toTerminal(int one,int two, int three){   
-//}
 
 //pow is method that is in the cmath libary that is the same as raising something to a power
-double numberInFunction(int year, float intrest){
+double debtor::numberInFunction(int year, float intrest){
     return pow((1+intrest/12),(year*12));
 }
 
 
 //Function that returns the monthly payment
-float amortizationCalc(double principle,float intrest,int year)
+float debtor::amortizationCalc(double principle,float intrest,int year)
 {
     float commonThing=numberInFunction(year,intrest);
 
@@ -48,7 +27,7 @@ float amortizationCalc(double principle,float intrest,int year)
 
 //Functions that set the private variables for the functions
     void debtor::setLoanOption(int& loanOption){
-        this -> loanOption = loanOption; 
+        this-> loanOption = loanOption; 
     }
     
     int debtor::getLoanOption(){
@@ -68,7 +47,10 @@ float amortizationCalc(double principle,float intrest,int year)
     double debtor::getYearlyIntrest(){
         return yearlyIntrest;
     }
-    
+    void debtor::print(std::string s){
+        std::cout<<s;
+        
+    }
 
 
 //*******************************************
