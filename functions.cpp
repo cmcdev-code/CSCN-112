@@ -1,63 +1,129 @@
+#include "declerations.h"
+#include <cmath>
 #include <iostream>
 
-class debtor
-{
-    
-    private:
-    
-        //The Option that the person chose
-        int loanOption;
-        int paymentPeriods;
 
-        //The loan ammount
-        double loanAmmount;
 
-        //The Yearly intrest
-        double yearlyIntrest;
+using namespace std;
 
-        //Function that will calc the Monthly payment
-        double amortizationCalc(double principle,double intrest,int year);//not ment to be called instead call the double callOfAmortizationCalc();
+//*******************************************
+//Function Declerations
 
-        double paymentCalculator(double monthlyPayment,double principal,double monthlyIntrest,int loanOption);//not ment to be called call the double callOf__paymentCalculator(); instead
-
-   public:
-
-        //Constructor to initilize the memory when creating an object of the class 
-        debtor()
-            {
-                loanOption = 10;//Loan Option can't == 0 because then the amortization formula would be dividing by 0 number^0 power would be 1 and the denomanator subtracts 1  
-                loanAmmount = 0.0f;//f in order to show that it is a floating point 
-                yearlyIntrest = 0.0f;
-
+//method that will take in input and error check it 
+double debtor::inOfPrincipalAmmount(){
+    double input_of_principal=0;
+    bool validInput=false;//bool so that there can be error checking
+    while(!validInput){
+        cout<<"How much money will you be borrowing as a number not words?\n";
+        cin>>input_of_principal;
+        if((input_of_principal > 1) && (input_of_principal < 100000000) && !(cin.fail())){//input has to be between 1 and 100,000,000(seems like a reasonable price to pay for painting!)
+            validInput=true;//while loop will exit 
             }
-        //Methods that will ask for the user input for the three inputs: principal ammount, loan option, and yearly interest.
-        double inOfPrincipalAmmount();
-        double inYearlyIntrest();
-        int inLoanOption();
+        else{
+            cin.clear();
+            validInput=false;//Already is false if this case happens, but will make it clear that this is an error to anyone reading the source code.
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout<<"Error please enter how much the loan will be for.";
+            }
+        }
+    return input_of_principal;
+}
+//Method that will ask for the yearly intrest and return the number also will do error checking
+double debtor::inYearlyIntrest(){
+    double input_of_yearly_intrest=0;
+    bool validInput=false;//bool so that there can be error checking
+    while(!validInput){
+        cout<<"What will the intrest be on the loan?\n";
+        cin>>input_of_yearly_intrest;
+        if((input_of_yearly_intrest > 0.1) && (input_of_yearly_intrest < 391) && !(cin.fail())){//input has to be between 0.1 and 391% https://www.nerdwallet.com/article/loans/personal-loans/what-is-predatory-lending
+            validInput=true;//while loop will exit 
+            }
+        else{
+            cin.clear();
+            validInput=false;//Already is false if this case happens, but will make it clear that this is an error to anyone reading the source code.
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout<<"Error please enter how much the intrest is.\n";
+            }
+        }
+    return input_of_yearly_intrest;
+}
+//method that will ask for the loan option that they want
+int debtor::inLoanOption(){
+    int input_of_loan_option=1;
+    bool validInput=false;//bool so that there can be error checking
+    while(!validInput){
+        cout<<"We offer three different loans options 5 year, 10 year,and 15 year which loan option do you want?";
+        cin>>input_of_loan_option;
+        if((input_of_loan_option == 5|| input_of_loan_option == 10 || input_of_loan_option==15) && !(cin.fail())){//input has to either be an integer that is 5,10,or 15.
+        validInput=true;//while loop will exit
+        }
+        else{
+            cin.clear();
+            validInput=false;//Already is false if this case happens, but will make it clear that this is an error to anyone reading the source code.
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout<<"Error please enter an integer that is either 5, 10, or 15. \n";
+            }
+        }
+    return input_of_loan_option;
+}
+//method that will call on the user inputs and set the numbers in the class = to them
+void debtor::in__of__all__user__inputs(){
+    setLoanOption(inLoanOption());//method that is a paramter of the other method will ask for the user which loan option they want 
+    setLoanAmmount(inOfPrincipalAmmount());//method that is a paramter of the other method will ask for the user how much money the loan will be 
+    setYearlyIntrest(inYearlyIntrest());//method that is a paramter of the other method will ask for the user what the yearly intrest will be
+}
 
-        //method that will call all the user inputs and then use the set methods bellow to set tha values to the corisponding ones
-        void in__of__all__user__inputs();
+//Method that returns the monthly payment
+double debtor::amortizationCalc(double principle,double intrest,int year)
+{   
+    double commonThing=pow((1+(intrest/12)),(year*12));
+    return principle * ((intrest/12 * commonThing)/(commonThing-1));
+}
+//Functions that set the private variables for the functions
+    void debtor::setLoanOption(int loanOption){
+        this-> loanOption = loanOption; 
+    }
 
-        //Set and get methods
-        //******************************************************************
-        void setLoanOption(int loanOption);
-        int getLoanOption();
+    int debtor::getLoanOption(){
+        return loanOption;
+    }
 
-        void setLoanAmmount(double loanAmmount);
-        double getLoanAmmount();
-        
-        void setYearlyIntrest(double yearlyIntrest);
-        double getYearlyIntrest();
+     void debtor::setLoanAmmount(double loanAmmount){
+        this ->loanAmmount = loanAmmount;    
+    }
 
-        void setPaymemtPeriods();
-        int getPaymentPeriods();
+    double debtor::getLoanAmmount(){
+        return loanAmmount;
+    }
 
-        //******************************************************************
+    void debtor::setYearlyIntrest(double yearlyIntrest){
+       this -> yearlyIntrest=yearlyIntrest;
+    }
 
-        //Method that will call on the method bellow and also use the get methods 
-        double callOfAmortizationCalc();
+    double debtor::getYearlyIntrest(){
+        return yearlyIntrest;
+    }
+    void debtor::setPaymemtPeriods(){
+        this -> paymentPeriods=getLoanOption()*12;
+    }
+    int debtor::getPaymentPeriods(){
+        return paymentPeriods;
+    }
 
-        //method that will calculate the montly payments 
-        double callOf__paymentCalculator();
-        
-};
+//*******************************************
+//Method that will call on the method bellow and also use the get methods 
+    double debtor::callOfAmortizationCalc(){
+        double principle=getLoanAmmount();//setting the variables like this will make the calculations easier 
+        double intrest=getYearlyIntrest();
+        int year=getLoanOption();
+        return amortizationCalc( principle, intrest, year);
+    }
+
+
+    double debtor::callOf__paymentCalculator(){
+        double monthlyPayment=callOfAmortizationCalc();
+        double principal=getLoanAmmount();//setting the variables like this will make the calculations easier 
+        double monthlyIntrest=getYearlyIntrest()/12;
+        int monthlyPaymentPeriod=getPaymentPeriods();
+        return paymentCalculator(monthlyPayment,principal,monthlyIntrest,loanOption);
+    }
