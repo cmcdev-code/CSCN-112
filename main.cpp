@@ -3,13 +3,15 @@
 #include <cmath>
 
 
-using namespace decleration;
+
 using namespace std;
 
 int main(){
   
-    debtor collin;
-    
+    debtor user;
+
+    user.in__of__all__user__inputs();
+
 
     return 0;
 }
