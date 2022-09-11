@@ -1,0 +1,135 @@
+Engr 133 Problem Set Advanced Plotting Assignment 
+Collin McDevitt
+11 September 2022
+clc,clear, close
+Problem 5.17 
+The following functions describe the oscillations in electric circuits and the vibrations of machines and structures. Plot these functions on the same plot. Because they are similar, decide how best to plot and label them to avoid confusion.
+
+
+The first thing that I want to do is create an array for the independent variable.  Note i plotted it originaly in desmos to see what range i should use
+t=4:0.001:15;
+Now getting the values for the two different functions. 
+Xt=10*exp(-0.5*t).*sin(3*t+2);
+Yt=6*exp(-0.4*t).*cos(5*t-3);
+Now plotting both functions
+plot(t,Xt,t,Yt,':'),grid on,legend('10exp(-.5t)sin(3*t+2)','6exp(-0.4t)cos(5t-3)')
+xlabel('t'),ylabel('f(t)')
+clc,clear
+5.25
+The volume V and surface area A of a sphere of radius r are given by
+  and 
+a. Plot V and A versus r in two subplots, for 0.1 ≤ r ≤ 100 m. Choose axes that will result in straight-line graphs for both V and A.
+creating the r array
+r=linspace(0.1,100,1000);
+Creating the volume and area arrays 
+v=(4/3)*pi*r.^3;
+a=4*pi*r.^2;
+Plotting the subplots 
+subplot(2,2,1)
+loglog(r,v),title('V=(4/3)pi*r^3'),grid on
+xlabel('radius'),ylabel('volume')
+subplot(2,2,2)
+loglog(r,a),title('A=4pi*r^2'),grid on
+xlabel('radius'),ylabel('area')
+b. Plot V and r versus A in two subplots, for 1 ≤ A ≤ 104 m2. Choose axes that will result in straight-line graphs for both V and r.
+in order to solve this we have to get the the volume in terms of the area and the radius in terms of the area
+solving for both will give these two equations  and 
+now getting the array of A values
+A=1:0.01:100000;
+Getting the array of volume values and radius values 
+Va=(4/3)*pi*(A/(4*pi)).^(3/2);
+Ra=sqrt(A/(4*pi));
+Now plotting both of them
+subplot(2,2,3)
+loglog(A,Va),title('V=(4pi/3)(A/(4pi))^1.5'),grid on
+xlabel("Area"),ylabel("Volume")
+
+subplot(2,2,4)
+loglog(A,Ra),title('R=(A/(4pi))^.5'),grid on
+xlabel("Area"),ylabel("Radius")
+clc,clear
+Problem 5.26 
+The current amount A of a principal P invested in a savings account paying an annual interest rate r is given by
+
+where n is the number of times per year the interest is compounded. For continuous compounding, A = Pert. Suppose $10,000 is initially invested at 2.5 percent (r = 0.025).
+a. Plot A versus t for 0 ≤ t ≤ 20 years for four cases: continuous compounding, annual compounding (n = 1), quarterly compounding (n = 4), and monthly compounding (n = 12). Show all four cases on the same subplot and label each curve. On a second subplot, plot the difference between the amount obtained from continuous compounding and the other three cases.
+Initializing variables
+P=10000;
+r=0.025;
+t=1:0.01:20;
+Now creating the three different arrays
+onceAyear=P*(1+r).^(t);
+quarterly=P*(1+r/4).^(t*4);
+monthly=P*(1+r/12).^(t*12);
+continuous=P*exp(r*t);
+Now plotting each function
+figure
+subplot(2,1,1)
+plot(t,onceAyear,t,quarterly,':',t,monthly,'--',t,continuous)
+legend("Compounded monthly","Compounded quarterly","Compounded Monthly", ...
+    "continuously compounded")
+title("$10,000 compounded at 2.5% interest")
+xlabel("years"),ylabel("dollars $")
+Now to plot the difference between continuous and the other cases
+conOnce=continuous-onceAyear;
+conQuart=continuous-quarterly;
+conMon=continuous-monthly;
+now to plot the three graphs 
+subplot(2,1,2)
+plot(t,conMon,t,conQuart,':',t,conOnce,'--')
+legend("Difference between continuous and monthly" , ...
+    "Difference between continuous and quarterly", ...
+    "Difference between continuous and yearly")
+title("Difference between continuous compounding and " + ...
+    "monthly, quarterly, and yearly")
+xlabel("years"),ylabel("Dollars $")
+b. Redo part a, but plot A versus t on log-log and semilog plots. Which plot gives a straight line?
+figure
+subplot(2,1,1)
+loglog(t,onceAyear,t,quarterly,':',t,monthly,'--',t,continuous)
+legend("Compounded monthly","Compounded quarterly","Compounded Monthly", ...
+    "continuously compounded")
+title("$10,000 compounded at 2.5% interest loglog")
+xlabel("years"),ylabel("dollars $")
+subplot(2,1,2)
+semilogy(t,onceAyear,t,quarterly,':',t,monthly,'--',t,continuous)
+legend("Compounded monthly","Compounded quarterly","Compounded Monthly", ...
+    "continuously compounded")
+title("$10,000 compounded at 2.5% interest semilogy")
+xlabel("years"),ylabel("dollars $")
+fprintf("The semilogy produces the straight line")
+clc,clear
+Problem 5.3
+Consider the following costs for a certain chemical product:
+Fixed cost: $2.045 million/year.
+Variable costs:
+Material cost: 62 cents per gallon of product.
+Energy cost: 24 cents per gallon of product.
+Labor cost: 16 cents per gallon of product.
+fixedCost= 2.045e+6;
+materialCost = 0.62;
+energyCost= 0.24;
+laborCost=0.16;
+Q=1:1:6e6;
+Assume that we produce only what we sell. Let P be the selling price in dollars per gallon. Suppose that the selling price and the sales quantity Q are interrelated as follows: 
+
+Accordingly, if we raise the price, the product becomes less competitive and sales drop.
+Preforming calculations    
+
+p=(6e6-Q)/(1.1e6);
+Totalcost=fixedCost+Q*(materialCost+energyCost+laborCost);
+TotalRevenue=Q.*p;
+TotalProfit=TotalRevenue-Totalcost;
+
+Now evalualting the results
+idx=find(TotalProfit>0);
+The first place where the total profit is positive 
+minQ=min(idx);
+getting the index where the break even point is 
+breakEvenPoint=Q(minQ);
+Displaying the results
+plot(Q,TotalCost,Q,TotalRevenue,':')
+title('Product Econmic model')
+xlabel('Quantity produce/sold')
+ylabel("Total Revenue/Cost, $")
+legend('Total cost','Total Revenue'),grid on
