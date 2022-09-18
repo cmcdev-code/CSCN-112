@@ -16,8 +16,8 @@ calling function
 [time2,time1]=max_height(h,Velocity,gravity);
 Displaying the results
 fprintf('The object hit the height of %1.0f \n \n',h)
-fprintf('Time1 %1.0f sec.',time1)
-fprintf('\nTime2 %1.0f sec.', time2)
+fprintf('Time1 %1.2f sec.',time1)
+fprintf('\nTime2 %1.2f sec.', time2)
 
 clc ,clear,close all 
 Problem 3.17
@@ -79,25 +79,57 @@ numberOFDaysA=length(A_GreaterthenCandA);
 
 Displaying results for B 
 fprintf('The price of stock A was compared for %2.0f days .\n \n',NumberOfDays)
-fprintf('The number of days that the price of A was greater then stocks B and C is %2.0f. \n',numberOFDaysA)
+fprintf(['The number of days that the price of stock A was greater ' ...
+    'then stocks B and C is %2.0f. \n'],numberOFDaysA)
+b. Use MATLAB to determine how many days the price of stock A was above either the price of stock B or the price of stock C.
+Just the same exact as part A but will use the or operator instead
+AGreaterthenCorA=find((price_A>price_B) | (price_A>price_C));
+numberOfDaysORA=length(AGreaterthenCorA);
+Now to display the results
+fprintf(['The number of days that the price of stock A was greater' ...
+    'then stocks B or C is %2.0f. \n'],numberOfDaysORA)
+c. Use MATLAB to determine how many days the price of stock A was above either the price of stock B or the price of stock C, but not both.
+This will be the same procces as before but will use the excluive or 
+A_GreaterthenCxorA=find(xor((price_A>price_B),(price_A>price_C)));
+aGreaterxorBC=length(A_GreaterthenCxorA);
+Now to display the results 
+fprintf(['The number of days that the price of stock A was greater then B or C ' ...
+    '\n,but not both is %2.0f'],aGreaterxorBC)
 
 
+clc,clear,close all
+
+12. The height and speed of a projectile (such as a thrown ball) launched with a speed of v0 at an angle A to the horizontal are given by
 
 
+where g is the acceleration due to gravity. The projectile will strike the ground when h(t) = 0, which gives the time to hit 
+Suppose that A = 40°, v0 = 35 m/s, and g = 9.81 m/s2. Use the MATLAB relational and logical operators to find the times when
+a. The height is no less than 18 m.
+Well the first thing that we need to do is find the interval on which the function is positive 
+this will be the interval of 0 to when the object hits the ground 
+due to the function being symetric at the vertex we can just use the fact that the t value of the verterx is 
+ this happends exactly between the two times the function is 0 so by multiplying it by 2 we will get the 2nd time that the function is 0 which will be the equation of  now in this function the vertext would be at point  therefore the 2nd time h is 0 will be 
+g=9.81;
+A=40;
+Velocity=35;
+t=0:0.01:(2*Velocity*(sind(A)/g));
+now to get the value of the height
+height=Velocity*sind(A)*t-(g*t.^2)/2;
+Now to find the times when the height is greater then or = 18 m
+heightGreaterThen18 = t(height>=18);
+displaying the results 
+fprintf(['The height is greater then or equal to 18m on the interval \n from %1.3fs to %1.3fs' ...
+    ' '],heightGreaterThen18(1),heightGreaterThen18(end))
+b. The height is no less than 10 m and the speed is simultaneously no greater than 30 m/s. 
+Well to do this we have to calculate the velocity at all the times
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+now to impliment this in code 
+veloctyChanging=sqrt(Velocity^2-2*Velocity*g*sind(A)+g^2*t.^2);
+now to find the interval when both the condistions are true 
+heightGreaterThen10andVelocity = t(height>=10 & veloctyChanging>=30);
+now to display the results 
+fprintf(['The height is greater then 10m and velocity greater then 30m/s on the interval \n from %1.3fs to %1.3fs' ...
+    ' '],heightGreaterThen10andVelocity(1),heightGreaterThen10andVelocity(end))
 
 
 
