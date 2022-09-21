@@ -6,8 +6,8 @@ Problem Set: User-Defined & Logical Functions Assignment
 
 creating the function 
 function [t1,t2] =max_height(h,v0,g)
-t1=(v0+(v0^2-2*g*h)^(1/2)/g);
-t2=(v0-(v0^2-2*g*h)^(1/2)/g);
+t1=(v0+(sqrt(v0^2-2*g*h)))/g;
+t2=(v0-(sqrt(v0^2-2*g*h)))/g;
     return
 note two times when the hieght will be reached due to the position function being a quadratic 
 creaing variabels 
@@ -42,8 +42,13 @@ Now to find the minimum r and corresponding area
 [rmin,Amin]=fminbnd(@area,0.5,5);
 Now to use the equation above to get the height for that radius 
 height=(3*V)/(pi*rmin^2);
+
+now to output the key parameters 
+fprintf("The minimum area and minimum radius is %1.2fm^2 and %1.2fm",Amin,rmin)
+fprintf("\nThe corresponding height is %1.2f m.",height)
+fprintf("\nThe volume was %1.0fm^3",V)
 now to get a range of values to display the area 
-rFGraph=0.5:0.01:5;
+rFGraph=0.5:0.001:5;
 AreaForGraph=area(rFGraph);
 getting an array where the values are less then the 10 percent times the area
 AforGraph=Amin*1.1;%getting the ten percent times the radius 
@@ -58,6 +63,36 @@ text(0.6,65,'V=pi*r^2*h/3=10^3 in')
 text(0.6,60,'A=pi*r*sqrt(r^2+(3*V/(pi*r^2))^2)')
 text(rmin,Amin-0.3,'*')
 text(radiusToGraph(end)+0.1,lessThen(end)-0.1,'%10 upper Area bound')
+
+fprintf("The lower bound for the radius is %1.2f and the higher bound is %1.2f",radiusToGraph(1),radiusToGraph(end))
+fprintf("The corresponding surface area to the radius is %1.2f and %1.2f",lessThen(1),lessThen(end))
+
+
+clc,clear, close all 
+
+20. Create a function called savings_balance that determines the balance in a savings account at the end of every year for the first n years, where n is an input. The account has an initial investment A (to be provided as input; for example, enter $10,000 as 10000) and an annually compounded interest rate of r% (to be provided as input; for example, enter 3.5% as 3.5). Display the information on screen in a table in which the first column is Year and the second is Balance ($). (Test case: n = 10, A = 10000, r = 3.5. After 10 years the balance is $14,105.99.)
+With an initial investment of A and interest rate r, the balance B after n years is given by:
+
+
+compoundIntrest=@(A,r,n) A*(1+r/100)^n;
+now to create an arraay with the initial ammount and the  number of cycles 
+A=10000;
+r=0.35;
+n=10;
+values=0:n-1;
+index=1:10;
+values(1)=A;
+i=1;
+while(i<length(values))
+   values(i+1)=compoundIntrest(values(i),r,n); 
+i=i+1;
+end
+now to print out the results 
+fprintf("The ammount of money after depositing $%1.2f at %1.2f intrest ",A,r)
+Table=table(index',values','VariableNames',{'Year','Balance ($)'});
+disp(Table)
+
+
 
 
 
@@ -112,7 +147,7 @@ due to the function being symetric at the vertex we can just use the fact that t
 g=9.81;
 A=40;
 Velocity=35;
-t=0:0.01:(2*Velocity*(sind(A)/g));
+t=0:0.01:2*(Velocity*(sind(A)/g));
 now to get the value of the height
 height=Velocity*sind(A)*t-(g*t.^2)/2;
 Now to find the times when the height is greater then or = 18 m
@@ -124,9 +159,9 @@ b. The height is no less than 10 m and the speed is simultaneously no greater th
 Well to do this we have to calculate the velocity at all the times
 
 now to impliment this in code 
-veloctyChanging=sqrt(Velocity^2-2*Velocity*g*sind(A)+g^2*t.^2);
+veloctyChanging=sqrt(Velocity^2-2*Velocity*g*sind(A)*t+g^2*t.^2);
 now to find the interval when both the condistions are true 
-heightGreaterThen10andVelocity = t(height>=10 & veloctyChanging>=30);
+heightGreaterThen10andVelocity = t(height>=10 & veloctyChanging<=30);
 now to display the results 
 fprintf(['The height is greater then 10m and velocity greater then 30m/s on the interval \n from %1.3fs to %1.3fs' ...
     ' '],heightGreaterThen10andVelocity(1),heightGreaterThen10andVelocity(end))
