@@ -17,7 +17,12 @@ void Employee::setId(std::string id){
 void Employee::setfileName(std::string fileName){
     this->fileName=fileName;
 }
-
+void Employee::setScore(double scores){
+    this->scores.push_back(scores);
+}
+void Employee::setScore(double scores, int i){
+    this->scores.at(i)=scores;
+}
 
 //get member functions
 std::string Employee::getName() const{
