@@ -88,6 +88,23 @@ while(lowerIntrest<100000)
 end
 Now to output the results 
 fprintf(['It takes %1.0f more years to reach $100,000\n comounded at ' ...
-    '3.5 intrest then 4.5.'],yearsLowerIntrest-yearsHigherIntrest)
+    '3.5%% intrest then 4.5%%.'],yearsLowerIntrest-yearsHigherIntrest)
+fprintf(['\nIt will take %1.0f years to reach $100,000 at 4.5%% compounded \n' ...
+'yearly with an intial deposit of $%1.2f'],yearsHigherIntrest,A)
+fprintf(['\nIt will take %1.0f years to reach $100,000 at 3.5%% compounded \n' ...
+    'yearly with an intial deposit of $%1.2f'],yearsLowerIntrest,A)
+
+clc,clear,close all
+46. The following table gives the approximate values of the static coefficient of friction μ for various materials.
+
+the first thing with many other programs is to create the variables 
+mOm=0.2;
+wOw=0.35;
+mOw=0.4;
+rOc=0.7;
+weight=inputdlg()
+
+
+
 
 
