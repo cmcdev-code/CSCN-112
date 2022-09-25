@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <string>
 
@@ -14,6 +13,11 @@ class  Employee
 
         void setId(std::string id);
         std::string getId() const;
+
+        void setScore(double scores);
+        void setScore(double scores, int i);
+        
+        double getScore(int index) const;
 
     private://private member variables 
         std::string name;
