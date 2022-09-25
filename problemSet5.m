@@ -102,7 +102,11 @@ mOm=0.2;
 wOw=0.35;
 mOw=0.4;
 rOc=0.7;
-weight=inputdlg()
+type=0;
+weight=inputdlg('What is the weight of the object');
+msg="What materials?";
+opt=["Metal on metal","wood on wood","metal on wood","rubber on concrete"];
+userIn=menu(msg,opt)
 
 
 
