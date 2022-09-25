@@ -102,11 +102,33 @@ mOm=0.2;
 wOw=0.35;
 mOw=0.4;
 rOc=0.7;
-type=0;
+force=0;
+option="";
+Now to ask the user for input 
 weight=inputdlg('What is the weight of the object');
+weight=str2double(weight);
 msg="What materials?";
 opt=["Metal on metal","wood on wood","metal on wood","rubber on concrete"];
-userIn=menu(msg,opt)
+userIn=menu(msg,opt);
+switch case 
+switch userIn
+    case 1
+        force = mOm*weight;
+        option = opt(1);
+    case 2 
+        force =wOw*weight;
+        option=opt(2);
+    case 3 
+        force =mOw*weight;
+        option =opt(3);
+    case 4
+        force =rOc*weight;
+        option= opt(4);
+    otherwise
+        fprintf('Fail')
+        force =0;
+end
+fprintf("The total force of "+option+" with weight of %2.2kgs is %2.2n.",weight,force)
 
 
 
