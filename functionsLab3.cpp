@@ -1,69 +1,47 @@
-#include "function.h"
+#include <vector>
 #include <string>
-#include <fstream>
-#include <iostream>
 
-//set member functions bellow 
+class  Employee
+{
+    public:
+    //set and get member functions 
+        void setName(std::string name);
+        std::string getName() const;
 
-void Employee::setName(std::string name){
-    this->name = name;
-}
-void Employee::setCity(std::string city){
-    this->city =city;
-}
-void Employee::setId(std::string id){
-    this->id =id;
-}
-void Employee::setfileName(std::string fileName){
-    this->fileName=fileName;
-}
-void Employee::setScore(double scores){
-    this->scores.push_back(scores);
-}
-void Employee::setScore(double scores, int i){
-    this->scores.at(i)=scores;
-}
+        void setCity(std::string city);
+        std::string getCity() const;
 
-//get member functions
-std::string Employee::getName() const{
-    return this->name;
-}
-std::string Employee::getCity() const{
-    return this->city;
-}
-std::string Employee::getId() const{
-    return this-> id;
-}
-std::string Employee::getfileName() const{
-    return this-> fileName;
-}
+        void setId(std::string id);
+        std::string getId() const;
 
-//user input functions 
-std::string userInput::fileInputName(){
-    std::string fileNameLocal="";   
-    std::cout<<"What is the name of the file? Please enter the extension example if it is a txt enter name.txt. \n";
-    std::getline(std::cin,fileNameLocal);
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        void setScore(double scores);
+        void setScore(double scores, int i);
+        
+        double getScore(int index) const;
 
-return fileNameLocal;
-}
-double userInput::scoreIn(){
-    double localScore=0;
-    while(true){
-        std::cout<<"What is the score of the user? \n";
-        std::cin>>localScore;
-        if( localScore>=1 && localScore<=5 && !(std::cin.fail())){
-            break;
-        }else{
-            std::cout<<"Error please enter a number greatr then or equal to 1 and also less then or equal to 5.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-        }
+    private://private member variables 
+        std::string name;
+        std::string city;
+        std::string id;
+        std::string fileName;
 
-    }
+        std::vector<double> scores;
 
-    return localScore;
-}
+    protected:
+        void setfileName(std::string fileName);
+        std::string getfileName() const;
+
+};
+class userInput: public Employee{//inheritaed class that will handel the user inputs and filer manipultaion
+
+    public:
+        std::string fileInputName();
+        double scoreIn();
 
 
+
+
+
+
+
+};
