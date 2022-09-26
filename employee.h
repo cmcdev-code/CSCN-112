@@ -1,6 +1,8 @@
+#pragma once
+//file that has the class 
 #include <vector>
 #include <string>
-#pragma once
+
 
 class Employee{
 
@@ -48,7 +50,6 @@ class Employee{
 
     //will print all the employee object info
     void printEmployeeInfo() const;
-
 
 
 private:
