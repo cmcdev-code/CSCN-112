@@ -13,10 +13,17 @@ Employee userDefined();
 string fileName();
 string ReadinGetLine(ifstream& in);
 void allFileInput(int index,ifstream& in,Employee& loclaObj);
+double scoreIn();
+void allFileOut(ofstream& out,Employee& localObj);
+
 
 int main(){
+
+
+
 Employee employee;
 ifstream in;
+ofstream out;
     while(true){
         string fName="";
         menuFunction(employee);
@@ -40,6 +47,12 @@ ifstream in;
         if(menuOption==2){
             employee=userDefined();
            }
+        if(menuOption==3){
+            employee.vectorPushBack(scoreIn());
+        }
+        if(menuOption==4){
+
+        }
         if(menuOption==5)employee.printEmployeeInfo();
 
 
@@ -148,4 +161,21 @@ else{
     localObj.vectorPushBack(num);
 }
     }
+}
+
+
+double scoreIn(){
+    double localScore=0;
+    while(true){
+        std::cout<<"What is the score of the user? \n";
+        std::cin>>localScore;
+        if( localScore>=1 && localScore<=5 && !(std::cin.fail())){
+            break;
+        }else{
+            std::cout<<"Error please enter a number greatr then or equal to 1 and also less then or equal to 5.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        }
+    }
+    return localScore;
 }
