@@ -132,8 +132,6 @@ void Employee::printEmployeeInfo() const{
 
     std::cout<<std::setw(26)<<std::left<<"End of information for:"<<std::right<<getName()<<"\n";
    
-    std::string pause;
-    std::cout<<"Type in a single char and hit enter to continue \n";
-    std::cin>>pause;
+    std::cin.ignore();
 }
 
