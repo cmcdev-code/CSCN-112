@@ -21,7 +21,8 @@ class Employee{
     int sizeVectorScore() const;
     void sortVector();
     double smallestVector();
-
+    double largestVector();
+    double avgVector();
 
 private:
     std::string name;
