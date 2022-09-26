@@ -15,11 +15,13 @@ string fileName();
 int main(){
 Employee employee;
 string fName="";
+ifstream in;
     while(true){
         menuFunction(employee);
         int menuOption=menuChoice();
         if(menuOption==1){
-            fName= fileName();
+            fName = fileName();
+            in.open(fName);
             
         }
 
