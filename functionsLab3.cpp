@@ -2,6 +2,7 @@
 #include <iomanip> 
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 
 void Employee::setName(std::string name){
@@ -47,6 +48,12 @@ double Employee::largestVector(){
 return largestInvector;
 
 }
+void Employee::delVector(){
+    this->score.clear();
+}
+
+
+
 Employee::Employee(){
     name="";
     city="";
@@ -68,4 +75,23 @@ std::string Employee::getID() const{
     return this->ID;
 }
 
+
+void Employee::printEmployeeInfo() const{
+    
+    std::cout<<"***************************************"<<'\n';
+    std::cout<<std::setw(30)<<std::right<<"Employee Info \n";
+    std::cout<<std::setw(20)<<std::left<<"Employee name:"<<std::right<<getName()<<'\n';
+    std::cout<<std::setw(20)<<std::left<<"City:"<<std::right<<getCity()<<'\n';
+    std::cout<<std::setw(20)<<std::left<<"ID:"<<std::right<<getID()<<'\n';
+    std::cout<<"***************************************"<<'\n'<<'\n';
+    std::cout<<std::setw(30)<<std::right<<"Customer Satisfaction Info \n";
+    for(int i=0;i<sizeVectorScore();i++){
+        std::cout<<vectorAtIndex(i)<<'\n';
+    }
+
+   
+    std::string pause;
+    std::cout<<"Type in a single char and hit enter to continue \n";
+    std::cin>>pause;
+}
 
