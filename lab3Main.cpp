@@ -23,6 +23,7 @@ int main(){
 Employee employee;//creating object
 ifstream in;//creating the if and of stream variables 
 ofstream out;
+    cout<<"Collin McDevitt CSCN 112 Lab-3 \n";
 
     while(true){//main loop 
         string fName="";//filename string 
@@ -198,16 +199,17 @@ out<<localObj.getID()<<'\n';//writes the ID to the file
 if(localObj.sizeVectorScore()>0){//checks wheather the vector has any values in it and will
 
 for(int i=0; i <  localObj.sizeVectorScore(); i++){
-    //writes to the file 
+    //writes to the file the number from the vector 
     out<<localObj.vectorAtIndex(i)<<'\n';
     }
 }
-out.close();
+out.close();//closes the file 
 }
+//will be called if the user switches files 
 void clearObj(Employee& localObj){
-    localObj.setCity("");
-    localObj.setID("");
-    localObj.setName("");
-    localObj.delVector();
+    localObj.setCity("");//sets city to nothing 
+    localObj.setID("");//sets ID to nothing
+    localObj.setName("");//sets name to nothing
+    localObj.delVector();//clears the vector 
 }
 
