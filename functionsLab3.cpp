@@ -36,8 +36,17 @@ double Employee::smallestVector(){
 return smallestInvector;
 
 }
+double Employee::largestVector(){
+    double largestInvector=vectorAtIndex(0);
+    for( int i =0;i<sizeVectorScore();i++){
+        if(largestInvector<vectorAtIndex(i)){
+            largestInvector=vectorAtIndex(i);
+        }
+    }
 
+return largestInvector;
 
+}
 Employee::Employee(){
     name="";
     city="";
@@ -58,14 +67,5 @@ std::string Employee::getCity() const{
 std::string Employee::getID() const{
     return this->ID;
 }
-
-
-
-
-
-
-
-
-
 
 
