@@ -2,14 +2,29 @@
 #include <iomanip>
 #include "employee.h"
 #include <string>
+#include <fstream>
+#include <stdlib.h>
+
 using namespace std;
 
-void menuFunction();
+void menuFunction(Employee& localObj);
 int menuChoice();
 Employee userDefined();
+string fileName();
 
 int main(){
+Employee employee;
+string fName="";
+    while(true){
+        menuFunction(employee);
+        int menuOption=menuChoice();
+        if(menuOption==1){
+            fName= fileName();
+            
+        }
 
+
+    }
 
 
 
@@ -30,7 +45,12 @@ Employee userDefined(){
     Employee local(localName,localCity,localId);
     return local;
 }
-
+string fileName(){
+    string localfileNAme="";
+        cout<<"What is the name of the file include the extension ?\n";
+        getline(cin,localfileNAme);
+    return localfileNAme;
+}
 
 
 void menuFunction(Employee& localObj){
@@ -46,6 +66,7 @@ cout<<"5- Print Employee Info \n";
 cout<<"6- Quit";
 
 }
+
 int menuChoice(){
     int x=0;
     cout<<"Please select your menu choice :\n";
