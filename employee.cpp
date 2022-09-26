@@ -1,3 +1,4 @@
+//file that has all the class function definitions
 #include "employee.h"//header file
 #include <iomanip> //manipulate the output 
 #include <string>//for strings
@@ -129,8 +130,8 @@ void Employee::printEmployeeInfo() const{
         //ouputs the data that will depened on the vector 
         std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Average Score:"<<std::right<<avgVector()<<'\n';
         std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Highest Score:"<<std::right<<largestVector()<<'\n';
-        std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Lowest score:"<<std::right<<smallestVector()<<'\n';
-        std::cout<<"List of all recorded scores: \n";
+        std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Lowest Score:"<<std::right<<smallestVector()<<'\n';
+        std::cout<<"List of all recorded Scores: \n";
 
         //outputs all the values in the vector 
         for(int i=0;i<sizeVectorScore();i++){
@@ -140,8 +141,10 @@ void Employee::printEmployeeInfo() const{
 
     else{
         //if the vector has no values in it then it will just store 0 for the values
+            std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Average Score:"<<std::right<<0<<'\n';
             std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Highest Score:"<<std::right<<0<<'\n';
-            std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Lowest score:"<<std::right<<0<<'\n';
+            std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Lowest Score:"<<std::right<<0<<'\n';
+            
             std::cout<<"List of all recorded scores: \n";
     }
     
@@ -150,6 +153,7 @@ void Employee::printEmployeeInfo() const{
    
     std::string pause;
     std::cout<<"Type in a single char and hit enter to continue. \n";
-    std::cin>>pause;
+    std::cin.ignore();
+    std::getline(std::cin,pause);
 }
 
