@@ -19,6 +19,8 @@ class Employee{
     void vectorPushBack(double score);
     double vectorAtIndex(int index) const;
     int sizeVectorScore() const;
+    void sortVector();
+    double smallestVector();
 
 
 private:
