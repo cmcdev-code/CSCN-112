@@ -26,7 +26,7 @@ double Employee::vectorAtIndex(int index) const{
 void Employee::sortVector(){
     std::sort(score.begin(),score.end());
 }
-double Employee::smallestVector(){
+double Employee::smallestVector() const{
     double smallestInvector=vectorAtIndex(0);
     for( int i =0;i<sizeVectorScore();i++){
         if(smallestInvector>vectorAtIndex(i)){
@@ -37,7 +37,7 @@ double Employee::smallestVector(){
 return smallestInvector;
 
 }
-double Employee::largestVector(){
+double Employee::largestVector() const{
     double largestInvector=vectorAtIndex(0);
     for( int i =0;i<sizeVectorScore();i++){
         if(largestInvector<vectorAtIndex(i)){
@@ -48,6 +48,29 @@ double Employee::largestVector(){
 return largestInvector;
 
 }
+
+
+    // for(int i=0;i<sizeVectorScore();i++){
+    //     std::cout<<vectorAtIndex(i)<<'\n';
+    // }
+
+
+
+double Employee::avgVector() const{
+    double avg=0;
+    for(int i=0;i<sizeVectorScore();i++){
+        avg=avg+vectorAtIndex(i);
+
+    }if(sizeVectorScore()>0){
+    avg= avg/sizeVectorScore();
+    }
+    else{
+        avg=0;
+    }
+    return avg;
+
+}
+
 void Employee::delVector(){
     this->score.clear();
 }
@@ -85,10 +108,29 @@ void Employee::printEmployeeInfo() const{
     std::cout<<std::setw(20)<<std::left<<"ID:"<<std::right<<getID()<<'\n';
     std::cout<<"***************************************"<<'\n'<<'\n';
     std::cout<<std::setw(30)<<std::right<<"Customer Satisfaction Info \n";
+
+    
+    
+    if(sizeVectorScore()>1){
+    std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Average Score:"<<std::right<<avgVector()<<'\n';
+    std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Highest Score:"<<std::right<<largestVector()<<'\n';
+    std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Lowest score:"<<std::right<<smallestVector()<<'\n';
+    std::cout<<"List of all recorded scores: \n";
+
+    
     for(int i=0;i<sizeVectorScore();i++){
         std::cout<<vectorAtIndex(i)<<'\n';
+        }
+    }
+    else{
+        std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Highest Score:"<<std::right<<0<<'\n';
+        std::cout<<std::fixed<<std::setprecision(1)<<std::setw(20)<<std::left<<"Lowest score:"<<std::right<<0<<'\n';
+        std::cout<<"List of all recorded scores: \n";
     }
 
+
+
+    std::cout<<std::setw(26)<<std::left<<"End of information for:"<<std::right<<getName()<<"\n";
    
     std::string pause;
     std::cout<<"Type in a single char and hit enter to continue \n";
