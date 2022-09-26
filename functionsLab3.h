@@ -20,9 +20,9 @@ class Employee{
     double vectorAtIndex(int index) const;
     int sizeVectorScore() const;
     void sortVector();
-    double smallestVector();
-    double largestVector();
-    double avgVector();
+    double smallestVector() const;
+    double largestVector() const;
+    double avgVector() const;
     void delVector();
 
     void printEmployeeInfo() const;
