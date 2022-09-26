@@ -23,6 +23,11 @@ class Employee{
     double smallestVector();
     double largestVector();
     double avgVector();
+    void delVector();
+
+    void printEmployeeInfo() const;
+
+
 
 private:
     std::string name;
