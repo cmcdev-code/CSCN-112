@@ -1,6 +1,8 @@
 #include "employee.h"
 #include <iomanip> 
 #include <string>
+#include <algorithm>
+
 
 void Employee::setName(std::string name){
     this-> name=name;
@@ -20,7 +22,20 @@ void Employee::vectorPushBack(double score){
 double Employee::vectorAtIndex(int index) const{
     return this->score.at(index);
 }
+void Employee::sortVector(){
+    std::sort(score.begin(),score.end());
+}
+double Employee::smallestVector(){
+    double smallestInvector=vectorAtIndex(0);
+    for( int i =0;i<sizeVectorScore();i++){
+        if(smallestInvector>vectorAtIndex(i)){
+            smallestInvector=vectorAtIndex(i);
+        }
+    }
 
+return smallestInvector;
+
+}
 
 
 Employee::Employee(){
@@ -28,9 +43,6 @@ Employee::Employee(){
     city="";
     ID="";
 }
-
-
-
 
 Employee::Employee(std::string name,std::string city,std::string ID){
     this->name=name;
