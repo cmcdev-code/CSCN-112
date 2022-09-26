@@ -15,6 +15,7 @@ string ReadinGetLine(ifstream& in);
 void allFileInput(int index,ifstream& in,Employee& loclaObj);
 double scoreIn();
 void allFileOut(ofstream& out,Employee& localObj);
+void clearObj(Employee& localObj);
 
 
 int main(){
@@ -33,16 +34,16 @@ ofstream out;
 
 
                 if(menuOption==1){
-                    employee.delVector();
-                    employee.setCity("");
-                    employee.setName("");
-                    employee.setCity("");
-                    
+                    clearObj(employee);
                     fName = fileName();
                     in.open(fName);
                 if(in.is_open()){
                     allFileInput(0,in,employee);
-                employee.printEmployeeInfo();}           
+                }else{
+                    cout<<"Error couldn't open please try again \n";
+                    in.clear();
+                    cin.ignore();
+                }
         }
         if(menuOption==2){
             employee=userDefined();
@@ -51,13 +52,13 @@ ofstream out;
             employee.vectorPushBack(scoreIn());
         }
         if(menuOption==4){
-
+            string nameOfFile="";
+            nameOfFile=fileName();
+            ofstream out;
+            out.open(nameOfFile,ofstream::out |ofstream::trunc);
+            allFileOut(out,employee);
         }
         if(menuOption==5)employee.printEmployeeInfo();
-
-
-
-
         if(menuOption==6){
             break;
         }
@@ -134,6 +135,7 @@ string ReadinGetLine(ifstream& in){
     return local;
 }
 void allFileInput(int index,ifstream& in,Employee& localObj){
+    
 double num=0;
 
 while(!in.fail()&&num>=0){
@@ -161,6 +163,8 @@ else{
     localObj.vectorPushBack(num);
 }
     }
+
+    in.close();
 }
 
 
@@ -179,3 +183,22 @@ double scoreIn(){
     }
     return localScore;
 }
+void allFileOut(ofstream& out,Employee& localObj){
+    
+out<<localObj.getName()<<'\n';
+out<<localObj.getCity()<<'\n';
+out<<localObj.getID()<<'\n';
+if(localObj.sizeVectorScore()>0){
+for(int i=0;i<localObj.sizeVectorScore();i++){
+    out<<localObj.vectorAtIndex(i)<<'\n';
+    }
+}
+out.close();
+}
+void clearObj(Employee& localObj){
+    localObj.setCity("");
+    localObj.setID("");
+    localObj.setName("");
+    localObj.delVector();
+}
+
