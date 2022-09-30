@@ -1,4 +1,4 @@
-  clc,clear,close all 
+clc,clear,close all 
 Lab: Numerical Methods Assignment
 Collin McDevitt
 9/30/2022
@@ -16,3 +16,13 @@ title('Profile of River Cross-Section')
 xlabel('Distance from Left Shore (ft)')
 ylabel('Depth (ft)')
 fprintf('The cross-sectional area is %5.0f feet. \n\n',area)
+
+clc,clear,close all
+Exercise #2...Problem 9.10
+Here we have the case of a rocket launch where the fuel burns for a specified length of time and we are interest in knowing the velocity at the end of the fuel burn. We are given the functions that describes the acceleration (dv/dt) and the mass as a function of time as fuel burns.
+
+
+
+
+
+
