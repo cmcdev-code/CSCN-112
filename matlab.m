@@ -21,7 +21,16 @@ clc,clear,close all
 Exercise #2...Problem 9.10
 Here we have the case of a rocket launch where the fuel burns for a specified length of time and we are interest in knowing the velocity at the end of the fuel burn. We are given the functions that describes the acceleration (dv/dt) and the mass as a function of time as fuel burns.
 
+What we need to do is solve for dv/dt 
 
+T=48000;%the thrust 
+m0=2200;%initial mass
+r=0.8;
+b=40;
+g=9.81;
+t0=0;
+tf=b;
+Now that we have all the 
 
 
 
