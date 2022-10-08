@@ -1,0 +1,69 @@
+clc,clear,close all 
+Collin McDevitt LAB: SYMBOLIC PROCESSING ASSIGNMENT
+10/8/2022
+Exercise #1 ... T11.2-2
+Problem Presentation 
+Given two equations with three unkowns and are sked to solve for "x" and "y" in terms of "a"
+Creating the variables    
+syms a x y 
+equation1 =x +6*y==a;
+equation2 =2*x-3*y==9;
+Solving the system of equatoons and displaying the results
+[X,ylabel]=solve(equation1,equation2,{x,y})
+
+
+Exercise #2 ... Problem 11,12
+Problem Presentation 
+Determine all the local minima and local maaxima and all the inflection points where dy/dx of the following function:
+Creating the variables 
+clear,clc,close all
+syms x
+y=x^4-(28/3)*x^3+9*x^2-5;%creating the function
+dydx=diff(y);%taking the first derivative 
+dy2dx2=diff(dydx);%taking the 2nd derivative
+Now that we have the sybolic derivatives we can solve for where the x value is = to 0 which will be the critical points of the function either it will achive a max min or an inflection point 
+x_points=solve(dydx);
+y_points=subs(y,x,x_points);
+now that we have the points and the value of the points we can take the 2nd derivative that will tell what type of point it is if it is greater then 0 it is concave up and a min point if it is less then 0 it is concave down and a max
+for k= 1:length(x_points)
+    eval(k)=subs(dy2dx2,x,x_points(k));
+    if double(eval(k))>0 
+        outcomes(k)="local min";
+    elseif double(eval(k))==0
+        outcomes(k)="inflection point";
+    else 
+        outcomes(k)="local maxima";
+    end
+end
+Now that all of our calculations are completed we can display the results 
+for k=1:length(x_points)
+    fprintf('\n A %s exists at x = %4.2f, y=%4.2f. \n\n' ...
+        ,outcomes{1,k},double(x_points(k)),double(y_points(k)))
+end
+now to plot it so we can get an image of what the graph will look like 
+fplot(y,[double(x_points(1))-1 double(x_points(length(x_points)))+1])
+hold on 
+for k=1:length(x_points)
+    plot(x_points(k),y_points(k),'rp')
+end
+grid minor 
+title('y=x^4 -(28/3)x^3 +9x^2 -5')
+text(0.5,-200,'Showing local maxima/minima')
+
+clc,clear,close all
+Exercise #3... Problem 11.20
+Problem Presentation 
+Here we have the case of a rocket launch where the fuel burns for a specified length of time and we are interested in knowing the velocity at the end of the fuel burn. We are given the functions that describes the acceleration (dv/dt) and mass as a function of time as fuel burns. 
+The first step it to create the variables 
+syms t T mo r b g to tf
+Peroform calculations 
+v_t= int((T/(mo*(1-r*t/b)))-g,to,tf);
+v_b=double(subs(v_t,{T mo r b g to tf},{48000 2200 0.8 40 9.81 0 40}));
+Now to output the results 
+fprintf("\nThe rocket velocity at fuel burnout is v=%6.2f m/s. \n \n",v_b)
+
+
+
+
+
+
